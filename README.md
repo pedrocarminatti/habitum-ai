@@ -20,9 +20,9 @@
 ## 📁 Monorepo Structure
 
 habitum-ai/
-├── frontend/ # React client
-├── backend/ # Express + Prisma API
-├── docs/ # MVP scope, wireframes, etc.
+├── frontend/   # React client
+├── backend/    # Express + Prisma API
+├── docs/       # MVP scope, wireframes, etc.
 
 ## 📌 Goals
 
