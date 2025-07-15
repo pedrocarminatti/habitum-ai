@@ -1,17 +1,14 @@
-import express from 'express';
-import dotenv from 'dotenv';
+import express from 'express'
+import { PrismaClient } from '../generated/prisma' // or '@prisma/client' if using default
 
-dotenv.config();
+const app = express()
+const prisma = new PrismaClient()
 
-const app = express();
-app.use(express.json());
+app.get('/users', async (_req, res) => {
+  const users = await prisma.user.findMany()
+  res.json(users)
+})
 
-const PORT = process.env.PORT || 3333;
-
-app.get('/', (_req, res) => {
-  res.send('HabitumAI backend is running!');
-});
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
-});
+app.listen(3333, () => {
+  console.log('🚀 Server running at http://localhost:3333')
+})
