@@ -12,4 +12,33 @@ model User {
   email     String   @unique
   name      String
   createdAt DateTime @default(now())
+  goals     Goal[]
+}
+
+model Goal {
+  id     Int     @id @default(autoincrement())
+  title  String
+  userId Int
+  user   User    @relation(fields: [userId], references: [id])
+  habits Habit[]
+}
+
+model Habit {
+  id         Int              @id @default(autoincrement())
+  name       String
+  goalId     Int
+  goal       Goal             @relation(fields: [goalId], references: [id])
+  executions HabitExecution[]
+
+  @@unique([goalId, name])
+}
+
+model HabitExecution {
+  id        Int      @id @default(autoincrement())
+  habitId   Int
+  habit     Habit    @relation(fields: [habitId], references: [id])
+  date      DateTime
+  completed Boolean  @default(false)
+
+  @@unique([habitId, date])
 }
